@@ -10,6 +10,26 @@ app.use(cors({ origin: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}));
 
+app.get('/index', (req, res) => {
+    console.log("req: ", req)
+    return res.status(200).json({message: "Success!"});
+})
+
+app.post('/create', (req, res) => {
+    console.log("req: ", req)
+    return res.status(200).json({message: "Success!"});
+})
+
+app.delete('/remove', (req, res) => {
+    console.log("req: ", req)
+    return res.status(200).json({message: "Success!"});
+})
+
+app.put('/update', (req, res) => {
+    console.log("req: ", req)
+    return res.status(200).json({message: "Success!"});
+});
+
 const server = http.createServer(app);
 
 function startServer(){
