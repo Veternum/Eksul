@@ -1,22 +1,49 @@
 import { Request, Response } from 'express';
+import User from './user.model';
+//import { IAuthRequestBody } from '../../interface';
+//import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import config from '../../environment';
 
 export const index = async (req: Request, res: Response) => {
-    console.log("req: ", req)
-    return res.status(200).json({message: "Success!"});
+    console.log("req: ", req.body)
+    try{
+        let users = await User.find({});
+        return res.status(200).json({data: users});
+    }catch(err){
+        return res.status(500).json({message: err})
+    }
 }
 
 export const create = async (req: Request, res: Response) => {
-    console.log("req: ", req)
-    return res.status(200).json({message: "Success!"});
+    try{
+        let body = req.body;
+        let response = await User.create(body);
+        return res.status(200).json({response});
+    }catch(err){
+        return res.status(500).json({message: err})
+    }
 }
 
 export const remove = async (req: Request, res: Response) => {
-    console.log("req: ", req)
-    return res.status(200).json({message: "Success!"});
+    try{
+        let id = req.params.id;
+        let body = req.body;
+        let response = await User.findByIdAndDelete(id, body);
+        return res.status(200).json({response});
+    }catch(err){
+        return res.status(500).json({message: err})
+    }
 }
 
 export const update = async (req: Request, res: Response) => {
-    console.log("req: ", req)
-    return res.status(200).json({message: "Success!"});
+    console.log("req: ", req.body)
+    try{
+        let id = req.params.id;
+        let body = req.body;
+        let response = await User.findByIdAndUpdate(id, body);
+        return res.status(200).json({response});
+    }catch(err){
+        return res.status(500).json({message: err})
+    }
 }
-
